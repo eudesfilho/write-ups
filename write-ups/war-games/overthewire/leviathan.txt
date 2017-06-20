@@ -1,0 +1,95 @@
+ssh leviathan0@leviathan.labs.overthewire.org -p 2223
+
+Level0: 
+$ cat .backup/bookmarks.html | grep password
+This will be fixed later, the password for leviathan1 is rioGegei8m
+
+Level1: 
+$ ltrace ./check
+password: pass
+
+strcmp("pas", "sex")
+
+$ ./check
+password: sex => Get shell
+
+$ whoami
+leviathan2
+$ cat /etc/leviathan_pass/leviathan2
+ougahZi8Ta
+
+Level2:
+$ touch "teste;sh"
+$ ./prinfile "teste;sh"
+$ whoami
+leviathan3
+$ cat/etc/leviathan_pass/leviathan3
+Ahdiemoo1j
+
+Level3: 
+$ ltrace ./level3 
+strcmp("h0no33", "kakaka")                                      = -1
+printf("Enter the password> ")                                  = 20
+fgets(Enter the password> snlprintf\n
+"snlprintf\\n\n", 256, 0xf7fccc20)                        = 0xffffd58c
+strcmp("snlprintf\\n\n", "snlprintf\n")                         = 1
+puts("bzzzzzzzzap. WRONG"bzzzzzzzzap. WRONG
+
+$ ./level3 
+Enter the password> snlprintf
+[You've got shell]!
+$ whoami
+leviathan4
+$ cat /etc/leviathan_pass/leviathan4                      
+vuH0coox6m
+
+Level4: 
+$ cd .trash/
+
+$ ./bin
+01010100 01101001 01110100 01101000 00110100 01100011 01101111 01101011 01100101 01101001 00001010
+
+$ ltrace ./bin 
+__libc_start_main(0x80484cd, 1, 0xffffd774, 0x80485c0 <unfinished ...>
+fopen("/etc/leviathan_pass/leviathan5", "r")
+
+A primeira coisa que imaginei é que a senha do level 5 seria esse número em binário. Logo,
+só precisamos converter para ASCII: Tith4cokei
+
+Level5:
+$ ltrace ./leviathan5 
+fopen("/tmp/file.log", "r")                                     = 0
+puts("Cannot find /tmp/file.log"Cannot find /tmp/file.log
+
+Podemos ver que o arquivo está procurando o arquivo /tmp/file.log. Se criarmos o arquivo
+/tmp/file.log como um link simbólico para /etc/leviathan_pass/leviathan6 é possível que
+consigamos a senha.
+
+$ ln -s /etc/leviathan_pass/leviathan6 /tmp/file.log
+$ ./leviathan5 
+UgaoFee4li
+
+Level6: 
+$ ./leviathan6 
+usage: ./leviathan6 <4 digit code>
+
+0x8048550 <main+67>:	call   0x8048400 <atoi@plt>
+0x8048555 <main+72>:	cmp    eax,DWORD PTR [esp+0x1c]
+0x8048559 <main+76>:	jne    0x8048575 <main+104>
+
+Vemos que o valor de $esp+0x1c é comparado com eax, e se for igual, jne retornará falso e
+não pularemos para a instrução de saída, em vez disso chamaremos um shell. Mas qual o valor
+de $esp+0x1c?
+
+(gdb) x/wx $esp+0x1c
+0xffffd69c:	0x00001bd3
+
+Esse é o valor em hexdecimal com o qual eax, nosso argumento do programa, é comparado. Como
+na entrada só aceitamos valores em decimal, precisamos saber qual o equivalente a 1bd3 em 
+decimal, que é 7123.
+
+$ ./leviathan6 7123
+$ whoami
+leviathan7
+$ cat /etc/leviathan_pass/leviathan7
+ahy7MaeBo9

@@ -1,0 +1,109 @@
+Bandit 
+
+ssh bandit0@bandit.labs.overthewire.org -p 2220
+
+Level0: $ cat readme
+Flag boJ9jbbUNNfktd78OOpsqOltutMc3MY1
+
+Level1: $ cat ./-
+Flag CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+
+Level2: $ cat spaces\ in\ this\ filename
+Flag UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+
+Level3: $ cat inhere/.hidden
+Flag pIwrPrtPN36QITSp3EQaw936yaFoFgAB
+
+Level4: file inhere/*
+inhere/-file00: data
+inhere/-file01: data
+inhere/-file02: data
+inhere/-file03: data
+inhere/-file04: data
+inhere/-file05: data
+inhere/-file06: data
+inhere/-file07: ASCII text
+inhere/-file08: data
+inhere/-file09: data
+
+$ cat inhere/-file07
+Flag koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+
+Level5: $ find /home/bandit5/inhere/ -size 1033c
+/home/bandit5/inhere/maybehere07/.file2
+
+$ cat inhere/maybehere07/.file2
+Flag DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+
+Level6: $ find / -size 33c -user bandit7 -group bandit6 2>/dev/null
+/var/lib/dpkg/info/bandit7.password
+
+$ cat /var/lib/dpkg/info/bandit7.password
+Flag HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+
+Level7: $ cat data.txt | grep millionth
+millionth	cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+
+Level8: $ cat data.txt | sort | uniq -u
+Flag UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+
+Level9: $ strings data.txt
+Flag truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+
+Level10: $ base64 -d data.txt 
+The password is IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
+
+Level11: $ cat data.txt
+Gur cnffjbeq vf 5Gr8L4qetPEsPk8htqjhRK8XSP6x2RHh
+The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
+
+Level12: 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
+
+Level13: $ ssh -i sshkey.private bandit14@localhost
+cat /etc/bandit_pass/bandit14   
+Flag 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+
+Level14: $ cat /etc/bandit_pass/bandit14 | nc localhost 30000
+Correct!
+Flag BfMYroe26WYalil77FoDi9qh59eK5xNr
+
+Level15: $ cat /etc/bandit_pass/bandit15 | openssl s_client -connect localhost:30001 -ign_eof
+Correct!
+Flag cluFn7wTiGryunymYOu4RcffSxQluehd
+
+Level16: nmap localhost -p31000-32000
+
+PORT      STATE SERVICE
+31046/tcp open  unknown
+31518/tcp open  unknown
+31691/tcp open  unknown
+31790/tcp open  unknown
+31960/tcp open  unknown
+
+$ cat /etc/bandit_pass/bandit16 | openssl s_client -connect localhost:31790 -quiet > /tmp/sadboy17/b16key
+$ chmod 600 /tmp/sadboy17/b16key
+$ ssh -i /tmp/sadboy17/b16key bandit17@localhost
+
+$ cat /etc/bandit_pass/bandit17
+Flag xLYVMN9WE5zQ5vHacb0sZEVqbrp7nBTn
+
+Level17: $ diff passwords.old passwords.new 
+42c42
+< HuGfa4alrcOA6o0a7Bt7ebGJJFO77ubO
+---
+> Flag kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
+
+Level18: $ ssh -t bandit18@bandit.labs.overthewire.org -p 2220 cat readme
+Flag IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
+
+Level19: $ ./bandit20-do cat /etc/bandit_pass/bandit20 
+Flag GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+
+Level20: 
+Server $ nc -nvlp 44444 < /etc/bandit_pass/bandit20
+Listening on [0.0.0.0] (family 0, port 44444)
+
+Client $ ./suconnect 44444
+Flag: gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
+
+Level21:

@@ -1,0 +1,23 @@
+Code:
+
+main:
+    mov $XXXXXXX, %eax
+    mov $0, %ebx
+    mov $0x5, %ecx
+loop:
+    test %eax, %eax
+    jz fin
+    add %ecx, %ebx
+    dec %eax
+    jmp loop
+fin:
+    cmp $0x8f2f, %ebx
+    je good
+    mov $0, %eax
+    jmp end
+good:
+    mov $1, %eax
+end:
+    ret
+
+The challenge says we should figure out what sould be there in the $XX to make main return the value 0x1. To accomplish that we have to enter in the function good() and to do that, the cmp $0x8f2f, %ebx needs to return true so we take the je good jump. 0x8f2f is a hexdecimal which is 36655 in decimal. We can see from the loop function that %ecx adds to the value of %ebx every loop and the value of %ecx is given from the main function, which is 0x5. So %ebx is being incremented by 0x5 everytime. Divinding 36655 by 5 we get 7331, which is 0x1CA3 in hexdecimal.

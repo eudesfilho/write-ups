@@ -1,0 +1,30 @@
+ssh krypton1@krypton.labs.overthewire.org -p 2222
+
+Level0: base64.b64decode("S1JZUFRPTklTR1JFQVQ=")
+'KRYPTONISGREAT'
+
+Level1: import codecs
+codecs.decode('YRIRY GJB CNFFJBEQ EBGGRA', 'rot_13')
+u'LEVEL TWO PASSWORD ROTTEN'
+
+Flag ROTTEN
+
+Level2: Caesar Cipher com key = 14
+Flag CAESARISEASY
+
+Level3: 
+A B C D E F G H I J K L M 
+      H		  T
+N O P Q R S T U V W X Y Z
+      A	  E 
+
+jds = the
+
+http://quipqiup.com/
+
+WELL DONE THE LEVEL FOUR PASSWORD IS BRUTE
+
+Level4: http://f00l.de/hacking/vigenere.php
+Flag CLEARTEXT
+
+Level5: Flag RANDOM

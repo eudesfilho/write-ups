@@ -1,0 +1,5 @@
+Looking at the note.txt we can guess its from Germany and looking at the picture given, we can assure its a Enigma Machine from WW2. Using the Enigma simulator from this site http://enigma.louisedade.co.uk/enigma.html we put the values from the note.txt on the right fields and we get the message
+
+QUIT EPUZ ZLIN GIND EED
+
+Seems wrong at first, but putting altogether we get QUITEPUZZLINGINDEED

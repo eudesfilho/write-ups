@@ -1,0 +1,21 @@
+The first thing I did was to use the file command:
+
+# file yarn
+
+yarn: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=03699e31e36acb60e370f0cd555e54521356061c, not stripped
+
+Then I used the strings command to see if I can find the flag, but I couldn't. Then I checked the man page for strings and I found a -n parameter that specifies the min-lenght of the strings. So I used the strings command again passing the "-n 1" parameter
+
+# strings -n 1 yarn
+
+and I found this:
+
+Sub
+mit
+_me
+_fo
+r_I
+_am
+_th
+e_f
+lag

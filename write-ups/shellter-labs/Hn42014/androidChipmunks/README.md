@@ -1,0 +1,5 @@
+O arquivo baixado é um .apk, ou seja, um aplicativo Android. Decompilando o apk (http://www.javadecompilers.com/apk), na pasta com/chipmunks/news, há o
+arquivo MainActivity.java. Visualizando o código, podemos ver a linha
+new HttpAsyncTask().execute(new String[]{"http://hnr4.hackingnroll.com/?flag={the_truth_is_the_daughter_of_time}"});
+
+Flag: the_truth_is_the_daughter_of_time
