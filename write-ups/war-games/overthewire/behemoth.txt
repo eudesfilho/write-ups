@@ -1,0 +1,23 @@
+ssh behemoth0@behemoth.labs.overthewire.org -p 2221
+
+Level 0:
+$ ltrace ./behemoth0 
+printf("Password: ")                                            = 10
+__isoc99_scanf(0x804876c, 0xffffd69b, 0xffffd690, 0x80482d2Password: unixisbetterthanwindows
+)    = 1                                         = 11
+strcmp("unixisbetterthanwindows", "eatmyshorts")
+
+Podemos ver que a senha é "eatmyshorts".
+
+$ ./behemoth0 
+Password: eatmyshorts
+Access granted..
+$ whoami
+behemoth1
+$ cat /etc/behemoth_pass/behemoth1
+aesebootiv
+
+Level1:
+
+
+
